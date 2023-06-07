@@ -20,7 +20,7 @@ const Navbar = () => {
 
               (
                 <Link href='/characters'>
-                  <div className='p-1 rounded hover:bg-green-300  text-cyan-600'>←</div>
+                  <div className='p-1 rounded hover:bg-green-300 text-cyan-600 text-2xl' style={{ fontFamily: 'get_schwifty' }}>←</div>
                 </Link>)}
 
           </>
