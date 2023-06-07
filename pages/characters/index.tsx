@@ -41,9 +41,11 @@ const Characters = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
               <div className='h-80 w-54 p-3 border-2 border-indigo-700 overflow-hidden mx-2 my-2' onClick={() => handleClick(character)}
               >
                 <img src={character.image} className='object-scale-down w-52 h-52' />
-                <div className='text-center text-cyan-600 p-2'>
-                  {character.name} <br /> {character.species} <br /> {character.status}
-                </div>
+                <p className='text-center text-cyan-600 p-2' style={{ fontFamily: 'get_schwifty' }}>
+                  {character.name} <br /></p>
+                <div className='text-center text-cyan-600 p-2' style={{ fontFamily: 'get_schwifty' }}>{character.species} <br /> {character.status}</div>
+
+
               </div>
 
 

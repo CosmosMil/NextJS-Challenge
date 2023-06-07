@@ -14,9 +14,10 @@ const Character = ({ data }: InferGetServerSidePropsType<typeof getStaticProps>)
         <div className='my-32 p-3 border-2 border-indigo-700 overflow-hidden'
         >
           <img src={data.image} className='w-90 h-90' />
-          <div className='text-center text-cyan-600 p-2'>
-            {data.name} <br /> {data.species} <br /> {data.status}
-          </div>
+          <p className='text-center text-cyan-600 p-2 text-2xl' style={{ fontFamily: 'get_schwifty' }}>{data.name} <br /> </p>
+          <div className='text-center text-cyan-600 p-2' style={{ fontFamily: 'get_schwifty' }}>{data.species} <br /> {data.status}</div>
+
+
         </div>
 
       </div>
