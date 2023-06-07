@@ -7,8 +7,13 @@ import image from '../images/FU.png'
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <div className='flex items-center text-3xl  text-cyan-600' style={{ fontFamily: 'get_schwifty' }}>
       <Image src={image} alt='Rick and Morty say FU' />
+      <div className={`flex-col ${styles.positionright}`}>
+        <p>welcome <br /> to server side rendering <br /> and static generation</p>
+      </div>
+
+
 
     </div>
 
