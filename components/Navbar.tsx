@@ -11,16 +11,16 @@ const Navbar = () => {
     <nav>
       <div className='flex justify-start ml-9 my-3 '>
         {pathname === '/' ? (
-          <Link className='p-1 rounded hover:bg-green-300  text-cyan-600 text-2xl' style={{ fontFamily: 'get_schwifty' }} href='/characters'>CHARACTERS</Link >
+          <Link className='p-1 rounded hover:bg-lime-300  text-cyan-600 text-2xl' style={{ fontFamily: 'get_schwifty' }} href='/characters'>CHARACTERS</Link >
         ) : (
           <>
             {pathname === '/characters' ? (
-              <Link className='p-1 rounded hover:bg-green-300 text-cyan-600 text-2xl' style={{ fontFamily: 'get_schwifty' }} href='/'>HOME</Link >) :
+              <Link className='p-1 rounded hover:bg-lime-300 text-cyan-600 text-2xl' style={{ fontFamily: 'get_schwifty' }} href='/'>HOME</Link >) :
 
 
               (
                 <Link href='/characters'>
-                  <div className='p-1 rounded hover:bg-green-300 text-cyan-600 text-2xl' style={{ fontFamily: 'get_schwifty' }}>←</div>
+                  <div className='p-1 rounded hover:bg-lime-300 text-cyan-600 text-2xl' style={{ fontFamily: 'get_schwifty' }}>←</div>
                 </Link>)}
 
           </>

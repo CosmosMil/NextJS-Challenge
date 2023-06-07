@@ -11,11 +11,11 @@ const Character = ({ data }: InferGetServerSidePropsType<typeof getStaticProps>)
     <div key={data.id}>
 
       <div className='flex flex-wrap items-start justify-center'>
-        <div className='my-32 p-3 border-2 border-indigo-700 overflow-hidden h-5/6'
+        <div className='my-24 p-3'
         >
-          <img src={data.image} />
-          <p className='text-center text-cyan-600 p-2 text-2xl' style={{ fontFamily: 'get_schwifty' }}>{data.name} <br /> </p>
-          <div className='text-center text-cyan-600 p-2' style={{ fontFamily: 'get_schwifty' }}>{data.species} <br /> {data.status}</div>
+          <img src={data.image} className='h-96 rounded-full p-5' />
+          <p className='text-center text-cyan-600 p-5 text-3xl' style={{ fontFamily: 'get_schwifty' }}>{data.name} <br /> </p>
+          <div className='text-center text-cyan-600 p-2 text-2xl' style={{ fontFamily: 'get_schwifty' }}>{data.species} <br /> {data.status}</div>
 
 
         </div>

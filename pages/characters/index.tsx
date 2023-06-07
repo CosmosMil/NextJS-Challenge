@@ -38,9 +38,9 @@ const Characters = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
             <React.Fragment key={character.id}>
 
 
-              <div className='h-96 w-54 p-3 border-2 border-indigo-700 overflow-hidden mx-2 my-2 hover:bg-green-300' onClick={() => handleClick(character)}
+              <div className='h-96 w-54 p-3  overflow-hidden mx-2 my-2 hover:bg-lime-300 rounded-full' onClick={() => handleClick(character)}
               >
-                <img src={character.image} className='object-scale-down w-52 h-52' />
+                <img src={character.image} className='object-scale-down w-52 h-52 rounded-full' />
                 <p className='text-center text-cyan-600 p-2' style={{ fontFamily: 'get_schwifty' }}>
                   {character.name} <br /></p>
                 <div className='text-center text-cyan-600 p-2' style={{ fontFamily: 'get_schwifty' }}>{character.species} <br /> {character.status}</div>
