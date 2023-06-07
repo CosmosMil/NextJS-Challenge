@@ -4,12 +4,24 @@ import React from 'react'
 import styles from '../../styles/Characters.module.css'
 import Image from 'next/image'
 import image from '../../images/logo.png'
+import Router, { useRouter } from 'next/router'
 
 type Props = {
   data: ArrayData
 }
 
+
+
+
 const Characters = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+
+  const router = useRouter();
+
+  const handleClick = (character: Character) => {
+    const id = character.id;
+    router.push(`/characters/${id}`)
+  }
+
 
   console.log('data from client: ', data)
   return (
@@ -26,7 +38,7 @@ const Characters = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
             <React.Fragment key={character.id}>
 
 
-              <div className='h-80 w-54 p-3 border-2 border-indigo-700 overflow-hidden mx-2 my-2'
+              <div className='h-80 w-54 p-3 border-2 border-indigo-700 overflow-hidden mx-2 my-2' onClick={() => handleClick(character)}
               >
                 <img src={character.image} className='object-scale-down w-52 h-52' />
                 <div className='text-center text-cyan-600 p-2'>
@@ -46,7 +58,10 @@ const Characters = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
 
     </div>
   )
+
 }
+
+
 
 export default Characters
 
