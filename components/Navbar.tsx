@@ -1,12 +1,24 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router';
 import React from 'react'
 
-function Navbar() {
+const Navbar = () => {
+  const router = useRouter();
+  const { pathname } = router;
   return (
-    <div className='flex justify-start ml-9 my-3 '>
-      <Link className='p-1 rounded hover:bg-green-300  text-cyan-600' href='/'>HOME</Link >
+    <nav>
+      <div className='flex justify-start ml-9 my-3 '>
+        {pathname === '/' ? (
+          <Link className='p-1 rounded hover:bg-green-300  text-cyan-600' href='/characters'>CHARACTERS</Link >
+        ) : (
+          <Link className='p-1 rounded hover:bg-green-300  text-cyan-600' href='/'>HOME</Link >
 
-    </div>
+        )}
+
+
+
+      </div>
+    </nav>
   )
 }
 
