@@ -6,7 +6,7 @@ import Image from 'next/image'
 import image from '../../images/logo.png'
 
 type Props = {
-  data: Data
+  data: ArrayData
 }
 
 const Characters = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -52,13 +52,13 @@ export default Characters
 
 
 
-export const getServerSideProps: GetServerSideProps<{ data: Data | null }> = async (context) => {
+export const getServerSideProps: GetServerSideProps<{ data: ArrayData | null }> = async (context) => {
 
   const url = 'https://rickandmortyapi.com/api/character';
 
   try {
     const result = await fetch(url);
-    const data: Data = await result.json();
+    const data: ArrayData = await result.json();
 
     return { props: { data } };
   } catch (error) {

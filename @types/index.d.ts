@@ -1,4 +1,4 @@
-interface Data {
+interface ArrayData {
   map(arg0: (character: any) => React.JSX.Element): React.ReactNode;
   results: Array,
   
