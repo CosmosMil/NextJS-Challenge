@@ -25,10 +25,11 @@ const Characters = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
 
   console.log('data from client: ', data)
   return (
-    <div>
+    <div className='flex flex-col items-center'>
+      <Image src={image} alt='Rick and Morty logotype' />
 
       <div className='flex flex-wrap items-start justify-center'>
-        <Image src={image} alt='Rick and Morty logotype' />
+
 
         {data ? data.results.map((character: Character) => {
 
@@ -43,7 +44,7 @@ const Characters = ({ data }: InferGetServerSidePropsType<typeof getServerSidePr
                 <img src={character.image} className='object-scale-down w-52 h-52 rounded-full' />
                 <p className='text-center text-cyan-600 p-2' style={{ fontFamily: 'get_schwifty' }}>
                   {character.name} <br /></p>
-                <div className='text-center text-cyan-600 p-2' style={{ fontFamily: 'get_schwifty' }}>{character.species} <br /> {character.status}</div>
+
 
 
               </div>
