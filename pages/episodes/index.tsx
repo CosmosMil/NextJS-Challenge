@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { gql } from "@apollo/client";
 import client from '../../apollo-client';
+import Character from '../characters/[id]';
 
 type Props = {
   results: any[]
@@ -48,20 +49,34 @@ const Episodes = ({ results }: Props) => {
   //       });
   //   }, []);
 
+  let characters: Character[] = [];
+  episodes && episodes.forEach((episode) => {
+    characters.push(...episode.characters);
+  });
+
 
 
   return (
     <div>
-      {episodes && episodes.map((episode) => (
-        <div key={episode.id}>
-          <h2>{episode.name}</h2>
+      {episodes &&
+        episodes.map((episode) => (
+          <div key={episode.id} className="grid grid-cols-2 gap-5 p-8">
 
+            <div>
+              <h2 className='ml-10 mt-10 text-3xl text-cyan-600' style={{ fontFamily: 'get_schwifty' }}>{episode.name}</h2>
+            </div>
+            <div>
+              {episode.characters.map((character: Character) => (
+                <div key={character.id}>
+                  <h2 className=' text-cyan-600 text-xl' style={{ fontFamily: 'get_schwifty' }}>{character.name}</h2>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        </div>
-      ))}
-
+        ))}
     </div>
-  )
+  );
 }
 
 export async function getServerSideProps() {
@@ -76,7 +91,9 @@ export async function getServerSideProps() {
             episode
             characters {
               name
-              image
+              episode {
+                id
+              }
             }
           }
         }
