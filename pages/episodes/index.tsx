@@ -1,53 +1,50 @@
 import React, { useEffect, useState } from 'react'
 import { gql } from "@apollo/client";
 import client from '../../apollo-client';
-import Character from '../characters/[id]';
 
 type Props = {
-  results: any[]
+  results: Episode[]
 }
 
 const Episodes = ({ results }: Props) => {
 
   const [episodes, setEpisodes] = useState(results);
+  const [season, setSeason] = useState('S01')
 
+  useEffect(() => {
+    const fetchEpisodes = async () => {
+      const { data } = await client.query({
+        query: gql`
+          query GetEpisodesBySEason($season: String!) {
+            episodes(filter: {episode: $season}) {
+              results {
+                id
+                name
+                air_date
+                episode
+                characters {
+                  name
+                  episode {
+                    id
+                  }
+                }
+              }
+            }
+          }
+        `,
+        variables: { season: season }
+      });
 
-  //   const [episodes, setEpisodes] = useState([]);
+      setEpisodes(data.episodes.results);
+    }
 
-  //   useEffect(() => {
-  //     fetch('https://rickandmortyapi.com/graphql', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         query: `query GetSeasonOne {
-  //         episodes(filter: {episode: "S01"})
-  //   {
-  //     results {
-  //       id
-  //       name
-  //       air_date
-  //       episode
-  //       characters {
-  //         name
-  //         image
-  //       }
-  //     }
-  //    }
+    fetchEpisodes();
+  }, [season]);
 
-  // }
-  //       `,
-  //       }),
-  //     })
-  //       .then((res) => res.json())
-  //       .then((result) => {
+  const handleSeasonChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSeason(e.target.value);
+  }
 
-  //         console.log(result.data.episodes.results);
-  //         setEpisodes(result.data.episodes.results);
-
-  //       });
-  //   }, []);
 
   let characters: Character[] = [];
   episodes && episodes.forEach((episode) => {
@@ -58,12 +55,28 @@ const Episodes = ({ results }: Props) => {
 
   return (
     <div>
+
+      <div className='flex p-5'>
+        <select onChange={handleSeasonChange}>
+          <option value="S01">Season 1</option>
+          <option value="S02">Season 2</option>
+          <option value="S03">Season 3</option>
+          <option value="S04">Season 4</option>
+          <option value="S05">Season 5</option>
+
+        </select>
+
+
+
+      </div>
       {episodes &&
         episodes.map((episode) => (
-          <div key={episode.id} className="grid grid-cols-2 gap-5 p-8">
+          <div key={episode.id} className="grid mt-10 grid-cols-2 gap-5 p-8">
 
             <div>
-              <h2 className='ml-10 mt-10 text-3xl text-cyan-600' style={{ fontFamily: 'get_schwifty' }}>{episode.name}</h2>
+
+              <h2 className='mt-10 text-3xl text-cyan-600' style={{ fontFamily: 'get_schwifty' }}>{episode.name}</h2>
+              <h2 className='text text-cyan-600' >{episode.episode}</h2>
             </div>
             <div>
               {episode.characters.map((character: Character) => (
@@ -79,35 +92,37 @@ const Episodes = ({ results }: Props) => {
   );
 }
 
-export async function getServerSideProps() {
-  const { data } = await client.query({
-    query: gql`
-      query GetSeasonOne {
-        episodes(filter: {episode: "S01"}) {
-          results {
-            id
-            name
-            air_date
-            episode
-            characters {
-              name
-              episode {
-                id
-              }
-            }
-          }
-        }
-      }
-    `,
-  });
+// export async function getServerSideProps() {
+//   const { data } = await client.query({
+//     query: gql`
+//       query GetEpisodesBySEason($season: String!) {
+//         episodes(filter: {episode: $season}) {
+//           results {
+//             id
+//             name
+//             air_date
+//             episode
+//             characters {
+//               name
+//               episode {
+//                 id
+//               }
+//             }
+//           }
+//         }
+//       }
+//     `,
 
-  console.log(data.episodes.results);
+//   });
 
-  return {
-    props: {
-      results: data.episodes.results,
-    },
-  };
-};
+
+//   console.log(data.episodes.results);
+
+//   return {
+//     props: {
+//       results: data.episodes.results,
+//     },
+//   };
+// };
 
 export default Episodes
